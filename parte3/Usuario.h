@@ -12,13 +12,16 @@ class Usuario {
     private:
         int numero;
         string nome;
-        Arquivo *arquivos;
+        Arquivo arquivos[5];
         int prioridade;
     public:
         Usuario(int, string, int);
-
+        ~Usuario();
         void setArquivos(Arquivo*);
         Arquivo* getArquivos();
-        ~Usuario();
+        int getNumero();
+        int getPrioridade();
+        string getNome();
+        
 };
 #endif
