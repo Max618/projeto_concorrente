@@ -23,7 +23,6 @@ class Usuario {
         int getNumero();
         int getPrioridade();
         string getNome();
-        bool inserirNaFila(Fila<int>&)
-
+        bool inserirNaFila(Fila<Arquivo>*);
 };
 #endif
