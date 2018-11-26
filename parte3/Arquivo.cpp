@@ -22,3 +22,7 @@ void Arquivo::setNome(string nome){
 string Arquivo::getNome(){
     return this->nome;
 }
+
+bool Arquivo::getEspera(){
+    return this->espera;
+}

@@ -20,5 +20,6 @@ class Arquivo {
 
         void setNome(string);
         string getNome();
+        bool getEspera();
 };
 #endif
