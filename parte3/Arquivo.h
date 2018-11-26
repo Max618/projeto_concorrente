@@ -13,14 +13,19 @@ class Arquivo {
     private:
         string nome;
         bool espera;
+        int prioridade;
     public:
         Arquivo();
-        Arquivo(string, bool);
+        Arquivo(string, bool, int);
         ~Arquivo();
 
         void setNome(string);
         string getNome();
         bool getEspera();
         void setEspera(bool);
+        int getPrioridade();
+        void setPrioridade(int);
+
+        bool operator>(Arquivo&);
 };
 #endif
