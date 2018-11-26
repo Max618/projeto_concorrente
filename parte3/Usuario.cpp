@@ -36,3 +36,16 @@ string Usuario::getNome(){
     return this->nome;
 }
 
+bool Usuario::inserirNaFila(Fila<int> *fila){
+
+    int i=0;
+    while(!this->arquivos[i].getEspera())
+    {
+        i++;
+    }
+
+    this->arquivos[i]->setEspera(true);
+
+    fila->inserirNaFila(this->arquivos[i]);
+
+}

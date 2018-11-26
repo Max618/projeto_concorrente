@@ -1,6 +1,7 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 #include"Arquivo.h"
+#include"Fila.cpp"
 #include<string>
 class Usuario {
 /*----------------- File: Usuario.h ---------------------+
@@ -22,6 +23,7 @@ class Usuario {
         int getNumero();
         int getPrioridade();
         string getNome();
-        
+        bool inserirNaFila(Fila<int>&)
+
 };
 #endif
