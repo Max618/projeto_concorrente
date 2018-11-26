@@ -15,7 +15,10 @@ class Usuario {
         Arquivo *arquivos;
         int prioridade;
     public:
-        Usuario(int, string, Arquivo&, int);
+        Usuario(int, string, int);
+
+        void setArquivos(Arquivo*);
+        Arquivo* getArquivos();
         ~Usuario();
 };
 #endif

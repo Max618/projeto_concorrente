@@ -9,5 +9,15 @@ Arquivo::Arquivo(string nome){
 }
 
 Arquivo::Arquivo(){
-    
+
+}
+
+Arquivo::~Arquivo(){}
+
+void Arquivo::setNome(string nome){
+    this->nome = nome;
+}
+
+string Arquivo::getNome(){
+    return this->nome;
 }

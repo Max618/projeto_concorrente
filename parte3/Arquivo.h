@@ -16,5 +16,8 @@ class Arquivo {
         Arquivo();
         Arquivo(string);
         ~Arquivo();
+
+        void setNome(string);
+        string getNome();
 };
 #endif

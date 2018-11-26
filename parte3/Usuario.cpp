@@ -11,10 +11,13 @@ Usuario::Usuario(int numero, string nome_usuario, int prior): arquivos(){
     this->prioridade = prior;
 }
 
-void Usuario::SetArquivos(Arquivo *arq){`
+Usuario::~Usuario(){}
+
+void Usuario::setArquivos(Arquivo *arq){
     this->arquivos = arq;
 }
 
-Arquivo* Usuario::GetArquivos(){
+Arquivo* Usuario::getArquivos(){
     return this->arquivos;
 }
+
