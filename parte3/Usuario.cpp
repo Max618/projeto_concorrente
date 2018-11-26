@@ -15,3 +15,6 @@ void Usuario::SetArquivos(Arquivo *arq){`
     this->arquivos = arq;
 }
 
+Arquivo* Usuario::GetArquivos(){
+    return this->arquivos;
+}

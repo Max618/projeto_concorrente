@@ -12,7 +12,7 @@ class Usuario {
     private:
         int numero;
         string nome;
-        Arquivo arquivos[5];
+        Arquivo *arquivos;
         int prioridade;
     public:
         Usuario(int, string, Arquivo&, int);
