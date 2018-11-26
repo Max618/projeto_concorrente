@@ -1,6 +1,7 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 #include"Arquivo.h"
+#include<string>
 class Usuario {
 /*----------------- File: Usuario.h ---------------------+
 |DESCRICAO DO ARQUIVO 								  |
@@ -10,9 +11,11 @@ class Usuario {
 +-----------------------------------------------------+ */
     private:
         int numero;
+        string nome;
         Arquivo arquivos[5];
+        int prioridade;
     public:
-        Usuario(int);
+        Usuario(int, string, Arquivo&, int);
         ~Usuario();
 };
 #endif
