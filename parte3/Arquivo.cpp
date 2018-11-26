@@ -23,6 +23,10 @@ string Arquivo::getNome(){
     return this->nome;
 }
 
+void Arquivo::setEspera(bool e){
+    this->espera = e;
+}
+
 bool Arquivo::getEspera(){
     return this->espera;
 }
