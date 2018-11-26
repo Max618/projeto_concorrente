@@ -7,7 +7,7 @@
 using namespace std;
 
 int main() {
-    Fila <int> fila_impressao(30);
+    Fila <Arquivo> fila_impressao(3);
     
     Arquivo arq[5];
     
@@ -17,6 +17,10 @@ int main() {
     Usuario user1(1,"usuario 1",1);
     
     user1.setArquivos(arq);
+
+    for(int i = 0; i < 5; i++){
+        arq[i].setNome("nome2");
+    }
 
     for(int i = 0; i < 5; i++){
         cout << user1.getArquivos()[i].getNome() << " ";
