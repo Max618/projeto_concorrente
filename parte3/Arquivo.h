@@ -12,9 +12,10 @@ class Arquivo {
 +-----------------------------------------------------+ */
     private:
         string nome;
+        bool espera;
     public:
         Arquivo();
-        Arquivo(string);
+        Arquivo(string, bool);
         ~Arquivo();
 
         void setNome(string);

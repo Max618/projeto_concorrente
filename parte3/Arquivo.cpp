@@ -4,8 +4,9 @@
 
 using namespace std;
 
-Arquivo::Arquivo(string nome){
+Arquivo::Arquivo(string nome, bool e){
     this->nome = nome;
+    this->espera = e;
 }
 
 Arquivo::Arquivo(){
