@@ -42,7 +42,7 @@ void insertion_sort(int *elementos, int n){
 
 
 int main() {
-    int TAM = 100000;
+    int TAM = 1000000;
     int *vet = new int[TAM];
     int *vet2 = new int[TAM];
     int *vet3 = new int[TAM];
