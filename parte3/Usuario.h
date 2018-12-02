@@ -27,6 +27,8 @@ class Usuario {
         string getNome();
         bool inserirNaFila(Fila<Arquivo>*);
         void imprimirArquivo(Arquivo &);
+        bool temArquivo();
+        bool waitSecs();
 
         thread thread_init(Fila<Arquivo>*);
 };

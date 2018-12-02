@@ -13,31 +13,66 @@ int main() {
     
 
     //DEFININDO USUARIO 1
-    for(int i = 0; i < 5; i++){
-        arq[i].setNome("nome user 1");
-    }
     arq[0].setNome("arq 1 user 1");
     arq[1].setNome("arq 2 user 1");
+    arq[2].setNome("arq 3 user 1");
+    arq[3].setNome("arq 4 user 1");
+    arq[4].setNome("arq 5 user 1");
     
-    Usuario usuario(1,"usuario 1",3, arq);
+    Usuario usuario(1,"usuario 1",1, arq);
     //FIM USUARIO 1
 
     //DEFININDO USUARIO 2
-    for(int i = 0; i < 5; i++){
-        arq[i].setNome("nome user 2");
-    }
     arq[0].setNome("arq 1 user 2");
     arq[1].setNome("arq 2 user 2");
+    arq[2].setNome("arq 3 user 2");
+    arq[3].setNome("arq 4 user 2");
+    arq[4].setNome("arq 5 user 2");
 
-    Usuario usuario2(1,"usuario 1",1, arq);
+    Usuario usuario2(2,"usuario 2",1, arq);
     //FIM USUARIO 2
+
+    //DEFININDO USUARIO 3
+    arq[0].setNome("arq 1 user 3");
+    arq[1].setNome("arq 2 user 3");
+    arq[2].setNome("arq 3 user 3");
+    arq[3].setNome("arq 4 user 3");
+    arq[4].setNome("arq 5 user 3");
+    Usuario usuario3(3,"usuario 3",2, arq);
+    //FIM USUARIO 3
+
+    //DEFININDO USUARIO 4
+    arq[0].setNome("arq 1 user 4");
+    arq[1].setNome("arq 2 user 4");
+    arq[2].setNome("arq 3 user 4");
+    arq[3].setNome("arq 4 user 4");
+    arq[4].setNome("arq 5 user 4");
+
+    Usuario usuario4(4,"usuario 4",2, arq);
+    //FIM USUARIO 4
+
+    //DEFININDO USUARIO 5
+    arq[0].setNome("arq 1 user 5");
+    arq[1].setNome("arq 2 user 5");
+    arq[2].setNome("arq 3 user 5");
+    arq[3].setNome("arq 4 user 5");
+    arq[4].setNome("arq 5 user 5");
+
+    Usuario usuario5(5,"usuario 5",2, arq);
+    //FIM USUARIO 5
 
     //THREADS
     thread t1 = usuario.thread_init(fila_impressao);
     thread t2 = usuario2.thread_init(fila_impressao);
+    thread t3 = usuario3.thread_init(fila_impressao);
+    thread t4 = usuario4.thread_init(fila_impressao);
+    thread t5 = usuario5.thread_init(fila_impressao);
 
     t1.join();
     t2.join();
+    t3.join();
+    t4.join();
+    t5.join();
     //FIM THREADS
 
     return 0;
