@@ -11,7 +11,8 @@ Arquivo::Arquivo(string nome, bool e, int p){
 }
 
 Arquivo::Arquivo(){
-
+    this->prioridade = -1;
+    this->espera = false;
 }
 
 Arquivo::~Arquivo(){}
@@ -42,4 +43,32 @@ int Arquivo::getPrioridade(){
 
 void Arquivo::setPrioridade(int p){
     this->prioridade = p;
+}
+
+void Arquivo::imprimir(){
+    cout << "IMPRIMINDO ARQUIVO: " << this->nome << endl;
+    system("sleep 5");
+}
+
+ostream& operator<<(ostream& saida, const Arquivo& obj){
+
+    /*saida << obj.nome.c_str();
+    system("sleep 3");*/
+
+
+    saida << "[";
+    saida << "PRIORIDADE: " << obj.prioridade << " ESPERA: " << obj.espera << " NOME: " << obj.nome.c_str();
+    
+    saida << "]";
+    return saida; //permite cout << a << b << c;
+}
+
+Arquivo& Arquivo::operator=(Arquivo& obj){
+    if(this != &obj){
+        this->espera = obj.espera;
+        this->nome = obj.nome;
+        this->prioridade = obj.prioridade;
+    }
+     //cout << "OPERATOR ARQ: " << this->prioridade << " " << this->espera << " " << this->nome << endl;
+    return *this;
 }

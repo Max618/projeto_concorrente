@@ -56,7 +56,6 @@ int Fila<T>::cheia(){
 
 template <class T>
 int Fila<T>::inserir(T elemento){
-
 	if(this->cheia())
 		return 0;
 	
@@ -83,14 +82,15 @@ T Fila<T>::remover(){
 
 template <class T>
 void Fila<T>::imprimir(){
-	
 	if(!this->vazia()){	
-		
 		int i= (this->inicio+1) % this->tamanho;
 		while (i != (this->fim+1)%this->tamanho){
-		 cout << this->fila[i] << " " << endl;
-		 i = (i+1)%this->tamanho;
-	 }
+			cout << this->fila[i] << " " << endl;
+			i = (i+1)%this->tamanho;
+		}
+	}
+	else{
+		cout << "FILA VAZIA" << endl;
 	}
 }
 
