@@ -3,6 +3,8 @@
 #include"Arquivo.h"
 #include"Fila.cpp"
 #include<string>
+#include<thread>
+using namespace std;
 class Usuario {
 /*----------------- File: Usuario.h ---------------------+
 |DESCRICAO DO ARQUIVO 								  |
@@ -13,16 +15,21 @@ class Usuario {
     private:
         int numero;
         string nome;
-        Arquivo arquivos[5];
+        Arquivo *arquivos;
         int prioridade;
     public:
-        Usuario(int, string, int);
+        Usuario(int, string, int,Arquivo*);
         ~Usuario();
-        void setArquivos(Arquivo*);
+        void setArquivos(Arquivo*,int );
         Arquivo* getArquivos();
         int getNumero();
         int getPrioridade();
         string getNome();
         bool inserirNaFila(Fila<Arquivo>*);
+        void imprimirArquivo(Arquivo &);
+        bool temArquivo();
+        bool waitSecs();
+
+        thread thread_init(Fila<Arquivo>*);
 };
 #endif

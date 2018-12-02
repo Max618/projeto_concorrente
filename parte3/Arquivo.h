@@ -10,6 +10,7 @@ class Arquivo {
 | 													  |
 | Implementado por "Gabriel Maximiniano" em 25/11/2018|
 +-----------------------------------------------------+ */
+    friend ostream& operator<<(ostream&, const Arquivo&);
     private:
         string nome;
         bool espera;
@@ -25,7 +26,9 @@ class Arquivo {
         void setEspera(bool);
         int getPrioridade();
         void setPrioridade(int);
+        void imprimir();
 
         bool operator>(Arquivo&);
+        Arquivo& operator=(Arquivo&);
 };
 #endif
