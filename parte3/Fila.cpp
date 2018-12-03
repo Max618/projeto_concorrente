@@ -72,7 +72,7 @@ T Fila<T>::remover(){
 	if(!this->vazia()){	
 		
 		T aux ;//= this->fila[this->inicio];
-		aux = this->fila[this->inicio+1];
+		aux = this->fila[(this->inicio+1)%(this->tamanho)];
 		this->inicio = (this->inicio+1)%(this->tamanho);
 		this->tamanhoAtual--;
 
@@ -82,11 +82,13 @@ T Fila<T>::remover(){
 
 template <class T>
 void Fila<T>::imprimir(){
+	int j=0;
 	if(!this->vazia()){	
 		int i= (this->inicio+1) % this->tamanho;
-		while (i != (this->fim+1)%this->tamanho){
+		while (i != (this->fim+1)%this->tamanho && j<this->tamanhoAtual){
 			cout << this->fila[i] << " " << endl;
 			i = (i+1)%this->tamanho;
+			j++;
 		}
 	}
 	else{

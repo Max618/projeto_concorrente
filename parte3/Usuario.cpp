@@ -85,38 +85,44 @@ bool Usuario::inserirNaFila(Fila<Arquivo> *fila){
     shared_lock<shared_timed_mutex> lck(mtx_inserir);
     shared_lock<shared_timed_mutex> lck2(mtx_imprimir);
     int i;
-        do{
-            system("sleep 3");
-            i=0;
-            while(this->arquivos[i].getEspera() && i < 5)
-            {
-                i++;
-            }
+    do{
+        system("sleep 3");
+        i=0;
+        while(this->arquivos[i].getEspera() && i < 5)
+        {
+            i++;
+        }
 
-            this->arquivos[i].setEspera(true);
+        this->arquivos[i].setEspera(true);
 
-            while(fila->cheia() || !ready_inserir){ 
-                cv_inserir.wait(lck);
-            }
-                cout << "ENTRANDO CRITICA INSERIR FILA - " << this->numero << endl;
-                fila->inserir(this->arquivos[i]);
-                cout << "SAIDO CRITICA INSERIR FILA- " << this->numero << endl;
-            cv_inserir.notify_all(); 
+        while(fila->cheia() || !ready_inserir){ 
+            cv_inserir.wait(lck);
+        }
+        ready_inserir = false;
+            cout << "ENTRANDO CRITICA INSERIR FILA - " << this->numero << endl;
+            fila->inserir(this->arquivos[i]);
+            cout << "SAIDO CRITICA INSERIR FILA- " << this->numero << endl;
+        ready_inserir = true;
+        cv_inserir.notify_all(); 
 
-            while(!ready_imprimir){ 
-                cv_imprimir.wait(lck2); 
-            }
-            fila->ordenar();
-            ready_inserir = false;
-            ready_imprimir = false;
-                cout << "ENTRANDO CRITICA REMOVER FILA- " << this->numero << endl;
-                Arquivo aux = fila->remover();
-                this->imprimirArquivo(aux);
-                cout << "SAINDO CRITICA REMOVER FILA- " << this->numero << endl;
+        while(!ready_imprimir){ 
+            cv_imprimir.wait(lck2); 
+        }
+        ready_imprimir = false;
+        ready_inserir = false;
+        
+        fila->ordenar();
+            cout << "ENTRANDO CRITICA REMOVER FILA- " << this->numero << endl;
+            Arquivo aux = fila->remover();
+            this->imprimirArquivo(aux);
+            
+            cout << "SAINDO CRITICA REMOVER FILA- " << this->numero << endl;
 
-            ready_imprimir = true;
-            ready_inserir = true;
-            cv_imprimir.notify_all(); 
-        }while(this->waitSecs() && this->temArquivo());
+        ready_imprimir = true;
+        ready_inserir = true;
+        cv_inserir.notify_all(); 
+        cv_imprimir.notify_all(); 
+    }while(this->waitSecs() && this->temArquivo());
+
     return true;
 }

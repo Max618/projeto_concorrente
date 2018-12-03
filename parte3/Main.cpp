@@ -7,7 +7,7 @@
 using namespace std;
 
 int main() {
-    Fila <Arquivo> *fila_impressao = new Fila<Arquivo>(3);
+    Fila <Arquivo> *fila_impressao = new Fila<Arquivo>(4);
     
     Arquivo arq[5];
     
