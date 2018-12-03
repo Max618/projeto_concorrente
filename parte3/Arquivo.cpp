@@ -46,19 +46,13 @@ void Arquivo::setPrioridade(int p){
 }
 
 void Arquivo::imprimir(){
-    cout << "IMPRIMINDO ARQUIVO: " << this->nome << endl;
+    cout << "\tIMPRIMINDO ARQUIVO: " << this->nome << endl;
     system("sleep 5");
 }
 
 ostream& operator<<(ostream& saida, const Arquivo& obj){
-
-    /*saida << obj.nome.c_str();
-    system("sleep 3");*/
-
-
     saida << "[";
     saida << "PRIORIDADE: " << obj.prioridade << " ESPERA: " << obj.espera << " NOME: " << obj.nome.c_str();
-    
     saida << "]";
     return saida; //permite cout << a << b << c;
 }

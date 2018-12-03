@@ -29,6 +29,7 @@ class Usuario {
         void imprimirArquivo(Arquivo &);
         bool temArquivo();
         bool waitSecs();
+        void gerarAleatorio();
 
         thread thread_init(Fila<Arquivo>*);
 };

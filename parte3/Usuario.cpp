@@ -6,6 +6,8 @@
 #include<queue>
 #include<shared_mutex>         
 #include<condition_variable>
+#include<cstdlib>
+#include<ctime>
 
 using namespace std;
 
@@ -69,14 +71,16 @@ bool Usuario::temArquivo(){
 }
 
 void Usuario::imprimirArquivo(Arquivo& arq){
-    cout << "-------IMPRIMINDO-------" << endl;
-    cout << "USUARIO(" << this->numero << "): " << this->nome << " - PRIORIDADE: " << this->prioridade << endl;
+    cout << endl;
+    cout << "\t-------IMPRIMINDO-------" << endl;
+    cout << "\tUSUARIO(" << this->numero << "): " << this->nome << " - PRIORIDADE: " << this->prioridade << endl;
     arq.imprimir();
-    cout << "-------FIM IMPRIMINDO-------" << endl;
+    cout << "\t-------FIM IMPRIMINDO-------" << endl;
+    cout << endl;
 }
 
 bool Usuario::waitSecs(){
-    cout << "ESPERANDO 3 SECS" << endl;
+    cout << "->ESPERANDO 3 SECS" << endl;
     system("sleep 3");
     return true;
 }
@@ -86,24 +90,23 @@ bool Usuario::inserirNaFila(Fila<Arquivo> *fila){
     shared_lock<shared_timed_mutex> lck2(mtx_imprimir);
     int i;
     do{
-        system("sleep 3");
         i=0;
         while(this->arquivos[i].getEspera() && i < 5)
         {
             i++;
         }
-
-        this->arquivos[i].setEspera(true);
-
         while(fila->cheia() || !ready_inserir){ 
             cv_inserir.wait(lck);
         }
         ready_inserir = false;
-            cout << "ENTRANDO CRITICA INSERIR FILA - " << this->numero << endl;
             fila->inserir(this->arquivos[i]);
-            cout << "SAIDO CRITICA INSERIR FILA- " << this->numero << endl;
-        ready_inserir = true;
-        cv_inserir.notify_all(); 
+            this->arquivos[i].setEspera(true);
+        cout << endl << "FILA -> ";
+        fila->imprimir();
+        cout << endl;
+        
+        if(!ready_inserir)    
+            this->gerarAleatorio();    
 
         while(!ready_imprimir){ 
             cv_imprimir.wait(lck2); 
@@ -111,18 +114,26 @@ bool Usuario::inserirNaFila(Fila<Arquivo> *fila){
         ready_imprimir = false;
         ready_inserir = false;
         
-        fila->ordenar();
-            cout << "ENTRANDO CRITICA REMOVER FILA- " << this->numero << endl;
+            fila->ordenar();
             Arquivo aux = fila->remover();
             this->imprimirArquivo(aux);
             
-            cout << "SAINDO CRITICA REMOVER FILA- " << this->numero << endl;
 
         ready_imprimir = true;
         ready_inserir = true;
         cv_inserir.notify_all(); 
         cv_imprimir.notify_all(); 
-    }while(this->waitSecs() && this->temArquivo());
+    }while(this->temArquivo());
 
     return true;
+}
+
+void Usuario::gerarAleatorio(){
+    srand (this->numero*11);
+    while(((rand() % 6) + 1) != this->numero){  }
+    cout << "->ESPERANDO 3 SECS" << endl;
+    system("sleep 3");
+    ready_inserir = true;  
+    cv_inserir.notify_all();
+    cv_imprimir.notify_all(); 
 }
